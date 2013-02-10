@@ -37,12 +37,12 @@ func main() {
 	handle(err)
 	fmt.Println("\nUnk2:\nLength", length)
 	for i := 0; i < int(length); i++ {
-		n, err = r.ReadLong()
+		n, err = r.ReadLong() // are these ALWAYS the first N natural numbers?
 		handle(err)
 		fmt.Println(i, n)
 	}
 
-	length, err = r.ReadLong()
+	length, err = r.ReadLong() // is this ALWAYS the same as the previous length?
 	handle(err)
 	fmt.Println("\nUnk3:\nLength", length)
 	for i := 0; i < int(length); i++ {
@@ -51,25 +51,36 @@ func main() {
 		fmt.Println(i, n)
 	}
 
-	b, err := r.ReadByte()
+	b, err := r.ReadByte() // is this ALWAYS 1?
 	handle(err)
 	fmt.Println("Unk4:", b)
 
-	s, err := r.ReadShort()
+	s, err := r.ReadShort() // is this ALWAYS 2?
 	handle(err)
 	fmt.Println("Unk5:", s)
 
-	s, err = r.ReadShort()
+	s, err = r.ReadShort() // is this ALWAYS 2?
 	handle(err)
 	fmt.Println("Unk6:", s)
 
-	length, err = r.ReadLong()
+	length, err = r.ReadLong() // is this ALWAYS 10?
 	handle(err)
 	fmt.Println("\nUnk7:\nLength", length)
 	for i := 0; i < int(length); i++ {
 		n, err = r.ReadLong()
 		handle(err)
 		fmt.Println(i, n)
+	}
+
+	s, err = r.ReadShort() // is this ALWAYS 2?
+	handle(err)
+	fmt.Println("Unk8:", s)
+
+	var buf [17 * 17]byte
+	_, err = io.ReadFull(r.R, buf[:])
+	handle(err)
+	for i := 0; i < 17; i++ {
+		fmt.Println("Unk9:", i, buf[i*17:][:17])
 	}
 
 	x := hex.Dumper(os.Stdout)
