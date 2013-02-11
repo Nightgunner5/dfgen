@@ -152,68 +152,68 @@ func main() {
 	handle(err)
 	fmt.Println("World name:", str)
 
-	listListLength, err := r.ReadLong()
-	handle(err)
-	fmt.Println("MATERIAL raws:", listListLength)
-
-	for i := 0; i < int(listListLength); i++ {
-		listLength, err := r.ReadLong()
+	for _, kind := range []string{"MATERIAL", "ITEM", "CREATURE", "INTERACTION"} {
+		listListLength, err := r.ReadLong()
 		handle(err)
+		fmt.Println(kind, "raws:", listListLength)
 
-		for j := 0; j < int(listLength); j++ {
-			str, err = r.ReadString()
+		for i := 0; i < int(listListLength); i++ {
+			listLength, err := r.ReadLong()
 			handle(err)
 
-			fmt.Println(i, j, str)
+			for j := 0; j < int(listLength); j++ {
+				str, err = r.ReadString()
+				handle(err)
+
+				fmt.Println(i, j, str)
+			}
 		}
 	}
 
-	listListLength, err = r.ReadLong()
-	handle(err)
-	fmt.Println("ITEM raws:", listListLength)
-
-	for i := 0; i < int(listListLength); i++ {
+	for _, kind := range []string{"INORGANIC", "PLANT", "BODY", "BODYGLOSS", "CREATURE", "ITEM", "BUILDING", "ENTITY", "WORD", "SYMBOL", "TRANSLATION", "COLOR", "SHAPE", "COLOR_PATTERN", "REACTION", "MATERIAL_TEMPLATE", "TISSUE_TEMPLATE", "BODY_DETAIL_PLAN", "CREATURE_VARIATION", "INTERACTION"} {
 		listLength, err := r.ReadLong()
 		handle(err)
+		fmt.Println(kind, "string table:", listLength)
 
-		for j := 0; j < int(listLength); j++ {
+		for i := 0; i < int(listLength); i++ {
 			str, err = r.ReadString()
 			handle(err)
 
-			fmt.Println(i, j, str)
+			fmt.Println(i, str)
 		}
 	}
 
-	listListLength, err = r.ReadLong()
+	listLength, err := r.ReadLong()
 	handle(err)
-	fmt.Println("CREATURE raws:", listListLength)
-
-	for i := 0; i < int(listListLength); i++ {
-		listLength, err := r.ReadLong()
+	fmt.Println("Unk30:", listLength, "records")
+	for i := 0; i < int(listLength); i++ {
+		j, err := r.ReadLong()
 		handle(err)
 
-		for j := 0; j < int(listLength); j++ {
-			str, err = r.ReadString()
-			handle(err)
+		k, err := r.ReadLong()
+		handle(err)
 
-			fmt.Println(i, j, str)
-		}
+		fmt.Println(i, j, k)
 	}
 
-	listListLength, err = r.ReadLong()
+	n, err = r.ReadLong()
 	handle(err)
-	fmt.Println("INTERACTION raws:", listListLength)
+	fmt.Println("Unk31:", n)
 
-	for i := 0; i < int(listListLength); i++ {
-		listLength, err := r.ReadLong()
-		handle(err)
+	listLength, err = r.ReadLong()
+	handle(err)
+	fmt.Println("Unk32:", listLength, "records")
+	for i := 0; i < int(listLength); i++ {
+		n, err = r.ReadLong()
+		fmt.Println(i, n)
+	}
 
-		for j := 0; j < int(listLength); j++ {
-			str, err = r.ReadString()
-			handle(err)
-
-			fmt.Println(i, j, str)
-		}
+	listLength, err = r.ReadLong()
+	handle(err)
+	fmt.Println("Unk33:", listLength, "records")
+	for i := 0; i < int(listLength); i++ {
+		n, err = r.ReadLong()
+		fmt.Println(i, n)
 	}
 
 	x := hex.Dumper(os.Stdout)
