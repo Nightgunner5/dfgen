@@ -438,71 +438,103 @@ func main() {
 		fmt.Println(i, "Creature type:", s)
 		fmt.Println("(", stCreature[s], ")")
 
-		s, err = r.ReadShort()
+		n, err = r.ReadLong()
 		handle(err)
-		fmt.Println(i, "Unk48i:", s)
+		fmt.Println(i, "Unk48h:", n)
 
-		s, err = r.ReadShort()
-		handle(err)
-		fmt.Println(i, "Unk48j:", s)
-
-		listLength, err = r.ReadLong()
-		handle(err)
-		fmt.Println(i, "Unk48k:", listLength, "records")
-		for j := 0; j < int(listLength); j++ {
-			s, err = r.ReadShort()
+		for j := 0; j < 19; j++ {
+			listLength, err = r.ReadLong()
 			handle(err)
-			fmt.Println(i, "Unk48k:", j, s)
+			fmt.Println(i, "Unk48i", j, "a:", listLength, "records")
+			for k := 0; k < int(listLength); k++ {
+				s, err = r.ReadShort()
+				handle(err)
+				fmt.Println(i, "Unk48i", j, "a:", k, s)
+			}
+
+			listLength, err = r.ReadLong()
+			handle(err)
+			fmt.Println(i, "Unk48i", j, "b:", listLength, "records")
+			for k := 0; k < int(listLength); k++ {
+				n, err = r.ReadLong()
+				handle(err)
+				fmt.Println(i, "Unk48i", j, "b:", k, n)
+			}
 		}
 
-		listLength, err = r.ReadLong()
-		handle(err)
-		fmt.Println(i, "Unk48l:", listLength, "records")
-		for j := 0; j < int(listLength); j++ {
-			n, err = r.ReadLong()
+		for j := 0; j < 12; j++ {
+			listLength, err = r.ReadLong()
 			handle(err)
-			fmt.Println(i, "Unk48l:", j, n)
-		}
+			fmt.Println(i, "Unk48j", j, "a:", listLength, "records")
+			for k := 0; k < int(listLength); k++ {
+				n, err = r.ReadLong()
+				handle(err)
+				fmt.Println(i, "Unk48j", j, "a:", k, n)
+			}
 
-		for j := 0; j < 6; j++ {
-			n, err = r.ReadLong()
+			listLength, err = r.ReadLong()
 			handle(err)
-			fmt.Println(i, "Unk48m:", j, n)
-		}
-
-		listLength, err = r.ReadLong()
-		handle(err)
-		fmt.Println(i, "Unk48n:", listLength, "records")
-		for j := 0; j < int(listLength); j++ {
-			s, err = r.ReadShort()
-			handle(err)
-			fmt.Println(i, "Unk48n:", j, s)
-		}
-
-		listLength, err = r.ReadLong()
-		handle(err)
-		fmt.Println(i, "Unk48o:", listLength, "records")
-		for j := 0; j < int(listLength); j++ {
-			n, err = r.ReadLong()
-			handle(err)
-			fmt.Println(i, "Unk48o:", j, n)
+			fmt.Println(i, "Unk48j", j, "b:", listLength, "records")
+			for k := 0; k < int(listLength); k++ {
+				s, err = r.ReadShort()
+				handle(err)
+				fmt.Println(i, "Unk48j", j, "b:", k, s)
+			}
 		}
 
 		for j := 0; j < 2; j++ {
-			n, err = r.ReadLong()
+			listLength, err = r.ReadLong()
 			handle(err)
-			fmt.Println(i, "Unk48p:", j, n)
+			fmt.Println(i, "Unk48k", j, "a:", listLength, "records")
+			for k := 0; k < int(listLength); k++ {
+				s, err = r.ReadShort()
+				handle(err)
+				fmt.Println(i, "Unk48k", j, "a:", k, s)
+			}
+
+			listLength, err = r.ReadLong()
+			handle(err)
+			fmt.Println(i, "Unk48k", j, "b:", listLength, "records")
+			for k := 0; k < int(listLength); k++ {
+				n, err = r.ReadLong()
+				handle(err)
+				fmt.Println(i, "Unk48k", j, "b:", k, n)
+			}
 		}
 
-		listLength, err = r.ReadLong()
+		n, err = r.ReadLong()
 		handle(err)
-		fmt.Println(i, "Unk48q:", listLength, "records")
-		for j := 0; j < int(listLength); j++ {
+		fmt.Println(i, "Unk48l:", n)
+
+		for j := 0; j < 9; j++ {
+			listLength, err = r.ReadLong()
+			handle(err)
+			fmt.Println(i, "Unk48m", j, "a:", listLength, "records")
+			for k := 0; k < int(listLength); k++ {
+				s, err = r.ReadShort()
+				handle(err)
+				fmt.Println(i, "Unk48m", j, "a:", k, s)
+			}
+
+			listLength, err = r.ReadLong()
+			handle(err)
+			fmt.Println(i, "Unk48m", j, "b:", listLength, "records")
+			for k := 0; k < int(listLength); k++ {
+				n, err = r.ReadLong()
+				handle(err)
+				fmt.Println(i, "Unk48m", j, "b:", k, n)
+			}
+		}
+
+		for j := 0; j < 3; j++ {
 			s, err = r.ReadShort()
 			handle(err)
-			fmt.Println(i, "Unk48q:", j, s)
-		}
+			fmt.Println(i, "Unk48n", j, "a:", int16(s))
 
+			n, err = r.ReadLong()
+			handle(err)
+			fmt.Println(i, "Unk48n", j, "b:", n)
+		}
 		break
 	}
 
