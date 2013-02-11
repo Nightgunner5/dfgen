@@ -203,6 +203,7 @@ func main() {
 	listLength, err = r.ReadLong()
 	handle(err)
 	fmt.Println("Unk32:", listLength, "records")
+	unk32Length := int(listLength)
 	for i := 0; i < int(listLength); i++ {
 		n, err = r.ReadLong()
 		fmt.Println(i, n)
@@ -362,6 +363,100 @@ func main() {
 		str, err = r.ReadString()
 		handle(err)
 		fmt.Println(i, "Unk47n:", str)
+	}
+
+	for i := 0; i < unk32Length; i++ {
+		s, err = r.ReadShort()
+		handle(err)
+		fmt.Println(i, "Unk48a:", s)
+
+		n, err = r.ReadLong()
+		handle(err)
+		fmt.Println(i, "Unk48b:", n)
+
+		str, err = r.ReadString()
+		handle(err)
+		fmt.Println(i, "Unk48c:", str)
+
+		s, err = r.ReadShort()
+		handle(err)
+		fmt.Println(i, "Unk48d:", s)
+
+		s, err = r.ReadShort()
+		handle(err)
+		fmt.Println(i, "Unk48e:", s)
+
+		n, err = r.ReadLong()
+		handle(err)
+		fmt.Println(i, "Unk48f:", n)
+
+		s, err = r.ReadShort()
+		handle(err)
+		fmt.Println(i, "Unk48g:", s)
+
+		has_name, err := r.ReadByte()
+		handle(err)
+		if has_name > 1 {
+			panic("has_name ∉ {0, 1}")
+		}
+		if has_name == 1 {
+			NameStruct(r)
+		}
+
+		s, err = r.ReadShort()
+		handle(err)
+		fmt.Println(i, "Unk48h:", s)
+
+		s, err = r.ReadShort()
+		handle(err)
+		fmt.Println(i, "Unk48i:", s)
+
+		s, err = r.ReadShort()
+		handle(err)
+		fmt.Println(i, "Unk48j:", s)
+
+		listLength, err = r.ReadLong()
+		handle(err)
+		fmt.Println(i, "Unk48k:", listLength, "records")
+		for j := 0; j < int(listLength); j++ {
+			s, err = r.ReadShort()
+			handle(err)
+			fmt.Println(i, "Unk48k:", j, s)
+		}
+
+		listLength, err = r.ReadLong()
+		handle(err)
+		fmt.Println(i, "Unk48l:", listLength, "records")
+		for j := 0; j < int(listLength); j++ {
+			n, err = r.ReadLong()
+			handle(err)
+			fmt.Println(i, "Unk48l:", j, n)
+		}
+
+		for j := 0; j < 6; j++ {
+			n, err = r.ReadLong()
+			handle(err)
+			fmt.Println(i, "Unk48m:", j, n)
+		}
+
+		listLength, err = r.ReadLong()
+		handle(err)
+		fmt.Println(i, "Unk48n:", listLength, "records")
+		for j := 0; j < int(listLength); j++ {
+			s, err = r.ReadShort()
+			handle(err)
+			fmt.Println(i, "Unk48n:", j, s)
+		}
+
+		listLength, err = r.ReadLong()
+		handle(err)
+		fmt.Println(i, "Unk48o:", listLength, "records")
+		for j := 0; j < int(listLength); j++ {
+			n, err = r.ReadLong()
+			handle(err)
+			fmt.Println(i, "Unk48o:", j, n)
+		}
+		break
 	}
 
 	x := hex.Dumper(os.Stdout)
