@@ -170,14 +170,44 @@ func main() {
 		}
 	}
 
-	for _, kind := range []string{"INORGANIC", "PLANT", "BODY", "BODYGLOSS", "CREATURE", "ITEM", "BUILDING", "ENTITY", "WORD", "SYMBOL", "TRANSLATION", "COLOR", "SHAPE", "COLOR_PATTERN", "REACTION", "MATERIAL_TEMPLATE", "TISSUE_TEMPLATE", "BODY_DETAIL_PLAN", "CREATURE_VARIATION", "INTERACTION"} {
+	var stInorganic, stPlant, stBody, stBodyGloss, stCreature, stItem, stBuilding, stEntity, stWord, stSymbol, stTranslation, stColor, stShape, stColorPattern, stReaction, stMaterialTemplate, stTissueTemplate, stBodyDetailPlan, stCreatureVariation, stInteraction []string
+
+	for _, t := range []struct {
+		name string
+		list *[]string
+	}{
+		{"INORGANIC", &stInorganic},
+		{"PLANT", &stPlant},
+		{"BODY", &stBody},
+		{"BODYGLOSS", &stBodyGloss},
+		{"CREATURE", &stCreature},
+		{"ITEM", &stItem},
+		{"BUILDING", &stBuilding},
+		{"ENTITY", &stEntity},
+		{"WORD", &stWord},
+		{"SYMBOL", &stSymbol},
+		{"TRANSLATION", &stTranslation},
+		{"COLOR", &stColor},
+		{"SHAPE", &stShape},
+		{"COLOR_PATTERN", &stColorPattern},
+		{"REACTION", &stReaction},
+		{"MATERIAL_TEMPLATE", &stMaterialTemplate},
+		{"TISSUE_TEMPLATE", &stTissueTemplate},
+		{"BODY_DETAIL_PLAN", &stBodyDetailPlan},
+		{"CREATURE_VARIATION", &stCreatureVariation},
+		{"INTERACTION", &stInteraction},
+	} {
 		listLength, err := r.ReadLong()
 		handle(err)
-		fmt.Println(kind, "string table:", listLength)
+		fmt.Println(t.name, "string table:", listLength)
+
+		*t.list = make([]string, listLength)
 
 		for i := 0; i < int(listLength); i++ {
 			str, err = r.ReadString()
 			handle(err)
+
+			(*t.list)[i] = str
 
 			fmt.Println(i, str)
 		}
@@ -405,7 +435,8 @@ func main() {
 
 		s, err = r.ReadShort()
 		handle(err)
-		fmt.Println(i, "Unk48h:", s)
+		fmt.Println(i, "Creature type:", s)
+		fmt.Println("(", stCreature[s], ")")
 
 		s, err = r.ReadShort()
 		handle(err)
@@ -456,6 +487,22 @@ func main() {
 			handle(err)
 			fmt.Println(i, "Unk48o:", j, n)
 		}
+
+		for j := 0; j < 2; j++ {
+			n, err = r.ReadLong()
+			handle(err)
+			fmt.Println(i, "Unk48p:", j, n)
+		}
+
+		listLength, err = r.ReadLong()
+		handle(err)
+		fmt.Println(i, "Unk48q:", listLength, "records")
+		for j := 0; j < int(listLength); j++ {
+			s, err = r.ReadShort()
+			handle(err)
+			fmt.Println(i, "Unk48q:", j, s)
+		}
+
 		break
 	}
 
