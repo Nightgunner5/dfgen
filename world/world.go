@@ -216,6 +216,154 @@ func main() {
 		fmt.Println(i, n)
 	}
 
+	listLength, err = r.ReadLong()
+	handle(err)
+	fmt.Println("Unk34:", listLength, "records")
+	for i := 0; i < int(listLength); i++ {
+		n, err = r.ReadLong()
+		fmt.Println(i, n)
+	}
+
+	n, err = r.ReadLong()
+	handle(err)
+	fmt.Println("Unk35:", n)
+
+	n, err = r.ReadLong()
+	handle(err)
+	fmt.Println("Unk36:", n)
+
+	n, err = r.ReadLong()
+	handle(err)
+	fmt.Println("Unk37:", n)
+
+	n, err = r.ReadLong()
+	handle(err)
+	fmt.Println("Unk38:", n)
+
+	n, err = r.ReadLong()
+	handle(err)
+	fmt.Println("Unk39:", n)
+
+	listLength, err = r.ReadLong()
+	handle(err)
+	fmt.Println("Unk40:", listLength, "records")
+	for i := 0; i < int(listLength); i++ {
+		n, err = r.ReadLong()
+		fmt.Println(i, n)
+	}
+
+	listLength, err = r.ReadLong()
+	handle(err)
+	fmt.Println("Unk41:", listLength, "records")
+	for i := 0; i < int(listLength); i++ {
+		n, err = r.ReadLong()
+		fmt.Println(i, n)
+	}
+	unk41Length := int(listLength)
+
+	n, err = r.ReadLong()
+	handle(err)
+	fmt.Println("Unk42:", n)
+
+	n, err = r.ReadLong()
+	handle(err)
+	fmt.Println("Unk43:", n)
+
+	n, err = r.ReadLong()
+	handle(err)
+	fmt.Println("Unk44:", n)
+
+	n, err = r.ReadLong()
+	handle(err)
+	fmt.Println("Unk45:", n)
+
+	n, err = r.ReadLong()
+	handle(err)
+	fmt.Println("Unk46:", n)
+
+	for i := 0; i < unk41Length; i++ {
+		for j := 0; j < 3; j++ {
+			s, err = r.ReadShort()
+			handle(err)
+			fmt.Println(i, "Unk47a:", j, int16(s))
+		}
+
+		s, err = r.ReadShort()
+		handle(err)
+		fmt.Println(i, "Unk47b:", s)
+
+		listLength, err = r.ReadLong()
+		handle(err)
+		fmt.Println(i, "Unk47c:", listLength, "records")
+		for j := 0; j < int(listLength); j++ {
+			for k := 0; k < 3; k++ {
+				s, err = r.ReadShort()
+				handle(err)
+				fmt.Println(i, "Unk47c:", j, k, s)
+			}
+		}
+
+		s, err = r.ReadShort()
+		handle(err)
+		fmt.Println(i, "Unk47d:", s)
+
+		for j := 0; j < 3; j++ {
+			n, err = r.ReadLong()
+			handle(err)
+			fmt.Println(i, "Unk47e:", j, int32(n))
+		}
+
+		for j := 0; j < 3; j++ {
+			s, err = r.ReadShort()
+			handle(err)
+			fmt.Println(i, "Unk47f:", j, int16(s))
+		}
+
+		for j := 0; j < 3; j++ {
+			s, err = r.ReadShort()
+			handle(err)
+			fmt.Println(i, "Unk47g:", j, int16(s))
+		}
+
+		b, err = r.ReadByte()
+		handle(err)
+		fmt.Println(i, "Unk47h:", b)
+
+		for j := 0; j < 9; j++ {
+			s, err = r.ReadShort()
+			handle(err)
+			fmt.Println(i, "Unk47i:", j, int16(s))
+		}
+
+		for j := 0; j < 3; j++ {
+			n, err = r.ReadLong()
+			handle(err)
+			fmt.Println(i, "Unk47j:", j, int32(n))
+		}
+
+		for j := 0; j < 3; j++ {
+			s, err = r.ReadShort()
+			handle(err)
+			fmt.Println(i, "Unk47k:", j, int16(s))
+		}
+
+		for j := 0; j < 3; j++ {
+			n, err = r.ReadLong()
+			handle(err)
+			fmt.Println(i, "Unk47l:", j, int32(n))
+		}
+
+		for j := 0; j < 11; j++ {
+			s, err = r.ReadShort()
+			handle(err)
+			fmt.Println(i, "Unk47m:", j, int16(s))
+		}
+
+		str, err = r.ReadString()
+		handle(err)
+		fmt.Println(i, "Unk47n:", str)
+	}
+
 	x := hex.Dumper(os.Stdout)
 	defer x.Close()
 
