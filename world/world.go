@@ -152,6 +152,70 @@ func main() {
 	handle(err)
 	fmt.Println("World name:", str)
 
+	listListLength, err := r.ReadLong()
+	handle(err)
+	fmt.Println("MATERIAL raws:", listListLength)
+
+	for i := 0; i < int(listListLength); i++ {
+		listLength, err := r.ReadLong()
+		handle(err)
+
+		for j := 0; j < int(listLength); j++ {
+			str, err = r.ReadString()
+			handle(err)
+
+			fmt.Println(i, j, str)
+		}
+	}
+
+	listListLength, err = r.ReadLong()
+	handle(err)
+	fmt.Println("ITEM raws:", listListLength)
+
+	for i := 0; i < int(listListLength); i++ {
+		listLength, err := r.ReadLong()
+		handle(err)
+
+		for j := 0; j < int(listLength); j++ {
+			str, err = r.ReadString()
+			handle(err)
+
+			fmt.Println(i, j, str)
+		}
+	}
+
+	listListLength, err = r.ReadLong()
+	handle(err)
+	fmt.Println("CREATURE raws:", listListLength)
+
+	for i := 0; i < int(listListLength); i++ {
+		listLength, err := r.ReadLong()
+		handle(err)
+
+		for j := 0; j < int(listLength); j++ {
+			str, err = r.ReadString()
+			handle(err)
+
+			fmt.Println(i, j, str)
+		}
+	}
+
+	listListLength, err = r.ReadLong()
+	handle(err)
+	fmt.Println("INTERACTION raws:", listListLength)
+
+	for i := 0; i < int(listListLength); i++ {
+		listLength, err := r.ReadLong()
+		handle(err)
+
+		for j := 0; j < int(listLength); j++ {
+			str, err = r.ReadString()
+			handle(err)
+
+			fmt.Println(i, j, str)
+		}
+	}
+
 	x := hex.Dumper(os.Stdout)
 	defer x.Close()
 
