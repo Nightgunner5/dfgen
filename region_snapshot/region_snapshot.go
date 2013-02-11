@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"compress/gzip"
 	"encoding/hex"
 	"fmt"
 	"github.com/Nightgunner5/dfgen"
@@ -21,14 +20,8 @@ func main() {
 	handle(err)
 	defer f.Close()
 
-	g, err := gzip.NewReader(f)
+	r, err := dfgen.NewReader(bufio.NewReaderSize(f, 0x10000))
 	handle(err)
-	defer g.Close()
-
-	r := dfgen.Reader{bufio.NewReader(g)}
-
-	r.ReadLong() // version number (1404)
-	r.ReadLong() // compression state (0)
 
 	n, err := r.ReadLong()
 	handle(err)
@@ -76,13 +69,6 @@ func main() {
 	s, err = r.ReadShort() // is this ALWAYS 2?
 	handle(err)
 	fmt.Println("Unk8:", s)
-
-	var buf [17 * 17]byte
-	_, err = io.ReadFull(r.R, buf[:])
-	handle(err)
-	for i := 0; i < 17; i++ {
-		fmt.Println("Unk9:", i, buf[i*17:][:17])
-	}
 
 	x := hex.Dumper(os.Stdout)
 	defer x.Close()
