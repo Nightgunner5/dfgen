@@ -5,6 +5,7 @@ import (
 	"compress/gzip"
 	"encoding/hex"
 	"fmt"
+	"github.com/Nightgunner5/dfgen"
 	"io"
 	"os"
 )
@@ -24,7 +25,7 @@ func main() {
 	handle(err)
 	defer g.Close()
 
-	r := Stream{bufio.NewReader(g)}
+	r := dfgen.Reader{bufio.NewReader(g)}
 
 	r.ReadLong() // version number (1404)
 	r.ReadLong() // compression state (0)
